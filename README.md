@@ -12,10 +12,10 @@ Looks at two different signature samples, and tells whether or not the handwriti
 
 Can fill the `training-data` folder with whatever letter images as long as the names are in the correct format, either:
 
-1. `[letter]xxx.filetype` where `[letter]` represents which letter it's supposed to be, `xxx` are 3 distinct digits, and the filetype is either [.png](https://fileinfo.com/extension/png) or [.jpg](https://fileinfo.com/extension/jpg) 
-2. `[letter] (X).filetype` where `[letter]` represents the letter it's supposed to be, `X` is any number, and filetype is either [.png](https://fileinfo.com/extension/png) or [.jpg](https://fileinfo.com/extension/jpg) 
+1. `[letter]xxx.filetype` where `[letter]` represents which letter it's supposed to be, `xxx` are 3 distinct digits, and the filetype is either [.png](https://fileinfo.com/extension/png) or [.jpg](https://fileinfo.com/extension/jpg)
+2. `[letter] (X).filetype` where `[letter]` represents the letter it's supposed to be, `X` is any number, and filetype is either [.png](https://fileinfo.com/extension/png) or [.jpg](https://fileinfo.com/extension/jpg)
 
-## Dependancies 
+## Dependancies
 
 * [tensorflow](https://pypi.org/project/tensorflow/): machine learning library
 * [keras](https://pypi.org/project/Keras/): deep learning, nerual network APIs
@@ -23,6 +23,6 @@ Can fill the `training-data` folder with whatever letter images as long as the n
 * [numpy](https://pypi.org/project/numpy/): array processing (images are stored in an array)
 * [matplotlib](https://pypi.org/project/matplotlib/): plotting graphs
 
-### Have fun!
+Have fun!
 
-![](https://github.com/sherwinchiu/hand-writing-detection/blob/master/training-data/K_0/K%20(2).png)
+![Kangaroo](https://github.com/sherwinchiu/hand-writing-detection/blob/master/training-data/K_0/K%20(2).png)

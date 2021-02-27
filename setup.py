@@ -12,6 +12,7 @@ from random import randint
 """
 #----------------------------CONSTANTS----------------------------#
 NUMBER_OF_DIGITS_IN_DATA = 3
+DIRECTORIES = ['./training-data/a', './training-data/A_0', './training-data/b', './training-data/B_0', './training-data/c', './training-data/C_0', './training-data/d', './training-data/D_0', './training-data/e', './training-data/E_0', './training-data/f', './training-data/F_0', './training-data/g', './training-data/G_0', './training-data/h', './training-data/H_0', './training-data/i', './training-data/I_0', './training-data/j', './training-data/J_0', './training-data/k', './training-data/K_0', './training-data/l', './training-data/L_0', './training-data/m', './training-data/M_0', './training-data/n', './training-data/N_0', './training-data/o', './training-data/O_0', './training-data/p', './training-data/P_0', './training-data/q', './training-data/Q_0', './training-data/r', './training-data/R_0', './training-data/s', './training-data/S_0', './training-data/t', './training-data/T_0', './training-data/u', './training-data/U_0', './training-data/v', './training-data/V_0', './training-data/w', './training-data/W_0', './training-data/x', './training-data/X_0', './training-data/y', './training-data/Y_0', './training-data/z', './training-data/Z_0']
 
 #----------------------VARIABLE DECLARATIONS----------------------#
 training_images = []
@@ -39,13 +40,16 @@ def getRandomData(n, image_list, label_list):
     return a, b
 #-------------------------------MAIN------------------------------#
 # imports images
-for filename in os.listdir("./training_assets"):
-    if filename.endswith(".png") or filename.endswith(".jpg"):
-        image = cv2.imread(f"training_assets/{filename}")
-        image = resize(image, (32, 32, 3))
-        image = image/255
-        training_images.append(image)
-        training_labels.append(identify.classification.index(reformat(filename)))
+for directory in DIRECTORIES:
+    for filename in os.listdir(directory):
+        if filename.endswith(".png") or filename.endswith(".jpg"):
+            image = cv2.imread(f"{directory}/{filename}")
+            if image is not None:
+                image = resize(image, (32, 32, 3))
+                image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+                image = image/255
+                training_images.append(image)
+                training_labels.append(identify.classification.index(reformat(filename)))
 
 print("Import complete")
 testing_images, testing_labels = getRandomData(100, training_images, training_labels)
