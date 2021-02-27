@@ -13,6 +13,8 @@ NUMBER_OF_DIGITS_IN_DATA = 3
 #----------------------VARIABLE DECLARATIONS----------------------#
 training_images = []
 training_labels = []
+testing_images = []
+testing_labels = []
 
 #----------------------------FUNCTIONS----------------------------#
 def reformat(name):
@@ -33,7 +35,17 @@ for filename in os.listdir("./training_assets"):
 
 print("Import complete")
 
-# trains
+# training
 model = models.Sequential()
-# TODO: rest of training stuff here
+model.add(layers.Conv2D(32, (3, 3), activation = "relu", input_shape = (32, 32, 3)))
+model.add(layers.MaxPooling2D(2, 2))
+model.add(layers.Conv2D(64, (3, 3), activation = "relu"))
+model.add(layers.MaxPooling2D(2, 2))
+model.add(layers.Conv2D(64, (3, 3), activation = "relu"))
+model.add(layers.Flatten())
+model.add(layers.Dense(64, activation = "relu"))
+model.add(layers.Dense(10, activation = "softmax"))
+
+model.compile(optimizer = "adam", loss = "sparse_categorical_crossentropy", metrics = ["accuracy"])
+
 model.save("handwriting.model")
