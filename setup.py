@@ -1,6 +1,7 @@
 import os
 import cv2
 from tensorflow.keras import datasets, layers, models
+from skimage.transform import resize
 """
 # setup.py
 # Sherwin Chiu and Vivian Dai
@@ -20,17 +21,17 @@ testing_labels = []
 def reformat(name):
     '''Takes in a string name, returns the name reformatted 
     (without the numbers and image file type declaration'''
-    ind = len(name)
     for i in range(len(name) - 1, 0, -1):
         if name[i] == ".":
-            ind = i
             return name[:i - NUMBER_OF_DIGITS_IN_DATA]
     
 #-------------------------------MAIN------------------------------#
 # imports images
 for filename in os.listdir("./training_assets"):
     if filename.endswith(".png") or filename.endswith(".jpg"):
-        training_images.append(cv2.imread(f"training_assets/{filename}"))
+        image = cv2.imread(f"training_assets/{filename}")
+        image = resize(image, (32, 32, 3))
+        training_images.append(image)
         training_labels.append(reformat(filename))
 
 print("Import complete")
