@@ -11,7 +11,12 @@ import numpy as np
 import matplotlib.pyplot as plt 
 from keras.datasets import cifar10
 from skimage.transform import resize
-
+"""
+# main.py
+# Sherwin Chiu and Vivian Dai
+# 2021/02/26
+# Allows user to input the path to an image and identifies the letter
+"""
 
 # Style of pyplot
 plt.style.use('fivethirtyeight')
