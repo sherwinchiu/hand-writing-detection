@@ -1,5 +1,6 @@
 import os
 import cv2
+import identify
 from tensorflow.keras import datasets, layers, models
 from skimage.transform import resize
 """
@@ -31,8 +32,9 @@ for filename in os.listdir("./training_assets"):
     if filename.endswith(".png") or filename.endswith(".jpg"):
         image = cv2.imread(f"training_assets/{filename}")
         image = resize(image, (32, 32, 3))
+        image = image/255
         training_images.append(image)
-        training_labels.append(reformat(filename))
+        training_labels.append(identify.classification.index(reformat(filename)))
 
 print("Import complete")
 
