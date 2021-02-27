@@ -22,4 +22,7 @@ Can fill the `training-data` folder with whatever letter images as long as the n
 * [sci-kit image](https://pypi.org/project/scikit-image/): image processing (used to resize image)
 * [numpy](https://pypi.org/project/numpy/): array processing (images are stored in an array)
 * [matplotlib](https://pypi.org/project/matplotlib/): plotting graphs
-* 
+
+### Have fun!
+
+![](https://github.com/sherwinchiu/hand-writing-detection/blob/master/training-data/K_0/K%20(2).png)
