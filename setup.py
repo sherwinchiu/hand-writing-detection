@@ -5,7 +5,7 @@ import numpy
 import matplotlib.pyplot as plt 
 from tensorflow.keras import datasets, layers, models
 from keras.utils import Sequence
-from skimage.transform import resize
+from skimage.transform import resize, rotate
 from random import randint
 """
 # setup.py
@@ -50,6 +50,7 @@ for directory in DIRECTORIES:
             image = cv2.imread(f"{directory}/{filename}", cv2.IMREAD_GRAYSCALE)
             if image is not None:
                 image = resize(image, (32, 32, 3))
+                image = rotate(image, 0)
                 image = image/255
                 training_images.append(image)
                 training_labels.append(identify.classification.index(reformat(filename)))
