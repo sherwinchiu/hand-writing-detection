@@ -75,7 +75,7 @@ model.add(layers.Dense(len(identify.classification), activation = "softmax"))
 
 model.compile(optimizer = "adam", loss = "sparse_categorical_crossentropy", metrics = ["accuracy"])
 
-hist = model.fit(training_images, training_labels, epochs = len(identify.classification)*6, validation_data = (testing_images, testing_labels))
+hist = model.fit(training_images, training_labels, epochs = len(identify.classification)*10, validation_data = (testing_images, testing_labels))
 # hist = model.fit(training_images, training_labels, batch_size = 256, epochs = len(identify.classification), validation_split = 0.2)
 
 loss, accuracy = model.evaluate(testing_images, testing_labels)
