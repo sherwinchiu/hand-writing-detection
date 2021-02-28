@@ -70,11 +70,11 @@ model.add(layers.Conv2D(64, (3, 3), activation = "relu"))
 model.add(layers.MaxPooling2D(2, 2))
 model.add(layers.Flatten())
 model.add(layers.Dense(64, activation = "relu"))
-model.add(layers.Dense(10, activation = "softmax"))
+model.add(layers.Dense(len(identify.classification), activation = "softmax"))
 
 model.compile(optimizer = "adam", loss = "sparse_categorical_crossentropy", metrics = ["accuracy"])
 
-model.fit(training_images, training_labels, epochs = 10, validation_data = (testing_images, testing_labels))
+model.fit(training_images, training_labels, epochs = len(identify.classification), validation_data = (testing_images, testing_labels))
 # hist = model.fit(training_images, training_labels, batch_size = 256, epochs = 10, validation_split = 0.2)
 
 loss, accuracy = model.evaluate(testing_images, testing_labels)
