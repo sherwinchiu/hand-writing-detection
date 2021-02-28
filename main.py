@@ -10,7 +10,7 @@ from keras.utils import to_categorical
 import numpy as np
 import matplotlib.pyplot as plt 
 from keras.datasets import cifar10
-from skimage.transform import resize
+from skimage.transform import resize, rotate
 """
 # main.py
 # Sherwin Chiu and Vivian Dai
@@ -28,6 +28,7 @@ model = models.load_model("handwriting.model")
 path = input("give path to image")
 img = cv2.imread(path, cv2.IMREAD_GRAYSCALE)
 img = resize(img, (32, 32, 3))
+img = rotate(img, 0)
 prediction = model.predict(np.array([img])/255)
 index = np.argmax(prediction)
 print(classification[index])
