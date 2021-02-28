@@ -1,8 +1,10 @@
 import os
 import cv2
 import identify
+import numpy
 import matplotlib.pyplot as plt 
 from tensorflow.keras import datasets, layers, models
+from keras.utils import Sequence
 from skimage.transform import resize
 from random import randint
 """
@@ -54,6 +56,11 @@ for directory in DIRECTORIES:
 
 print("Import complete")
 testing_images, testing_labels = getRandomData(100, training_images, training_labels)
+training_images = numpy.asarray(training_images)
+training_labels = numpy.asarray(training_labels)
+testing_images = numpy.asarray(testing_images)
+testing_labels = numpy.asarray(testing_labels)
+
 
 # training
 model = models.Sequential()
@@ -61,25 +68,24 @@ model.add(layers.Conv2D(32, (3, 3), activation = "relu", input_shape = (32, 32, 
 model.add(layers.MaxPooling2D(2, 2))
 model.add(layers.Conv2D(64, (3, 3), activation = "relu"))
 model.add(layers.MaxPooling2D(2, 2))
-model.add(layers.Conv2D(64, (3, 3), activation = "relu"))
 model.add(layers.Flatten())
 model.add(layers.Dense(64, activation = "relu"))
 model.add(layers.Dense(10, activation = "softmax"))
 
 model.compile(optimizer = "adam", loss = "sparse_categorical_crossentropy", metrics = ["accuracy"])
-model.compile(optimizer = "adam", loss = "sparse_categorical_crossentropy", metrics = ["accuracy"])
 
-hist = model.fit(training_images, training_labels, epochs = 10, validation_data = (testing_images, testing_labels))
+model.fit(training_images, training_labels, epochs = 10, validation_data = (testing_images, testing_labels))
+# hist = model.fit(training_images, training_labels, batch_size = 256, epochs = 10, validation_split = 0.2)
 
 loss, accuracy = model.evaluate(testing_images, testing_labels)
 print(f"Loss: {loss}\nAccuracy: {accuracy}")
 
-plt.plot(hist.history["accuracy"])
-plt.plot(hist.history["val_accuracy"])
-plt.title("Model Accuracy")
-plt.ylabel("Accuracy")
-plt.xlabel("Epoch")
-plt.legend(["Train", "Val"], loc = "upper right")
-plt.show()
+# plt.plot(hist.history["accuracy"])
+# plt.plot(hist.history["val_accuracy"])
+# plt.title("Model Accuracy")
+# plt.ylabel("Accuracy")
+# plt.xlabel("Epoch")
+# plt.legend(["Train", "Val"], loc = "upper right")
+# plt.show()
 
 model.save("handwriting.model")
