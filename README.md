@@ -1,5 +1,7 @@
 # hand-writting-detection
 
+Sherwin is insane... 
+
 [![made-for-VSCode](https://img.shields.io/badge/Made%20for-VSCode-1f425f.svg)](https://code.visualstudio.com/)
 
 [![python](https://img.shields.io/badge/python-v3.6%2B-blue)](https://www.python.org/downloads/)
@@ -26,4 +28,4 @@ Can fill the `training-data` folder with whatever letter images as long as the n
 
 Have fun!
 
-![Kangaroo](https://github.com/sherwinchiu/hand-writing-detection/blob/master/training-data/K_0/K%20(2).png)
+![Kangaroo](https://github.com/sherwinchiu/hand-writing-detection/blob/master/training-data/K_0/k%20(177).png)
