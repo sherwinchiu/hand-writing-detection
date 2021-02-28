@@ -28,4 +28,4 @@ Can fill the `training-data` folder with whatever letter images as long as the n
 
 Have fun!
 
-![Kangaroo](https://github.com/sherwinchiu/hand-writing-detection/blob/master/training-data/K_0/K%20(2).png)
+![Kangaroo](https://github.com/sherwinchiu/hand-writing-detection/blob/master/training-data/K_0/k%20(177).png)
