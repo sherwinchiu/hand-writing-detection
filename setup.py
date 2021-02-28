@@ -74,18 +74,18 @@ model.add(layers.Dense(len(identify.classification), activation = "softmax"))
 
 model.compile(optimizer = "adam", loss = "sparse_categorical_crossentropy", metrics = ["accuracy"])
 
-model.fit(training_images, training_labels, epochs = len(identify.classification), validation_data = (testing_images, testing_labels))
-# hist = model.fit(training_images, training_labels, batch_size = 256, epochs = 10, validation_split = 0.2)
+hist = model.fit(training_images, training_labels, epochs = len(identify.classification), validation_data = (testing_images, testing_labels))
+# hist = model.fit(training_images, training_labels, batch_size = 256, epochs = len(identify.classification), validation_split = 0.2)
 
 loss, accuracy = model.evaluate(testing_images, testing_labels)
 print(f"Loss: {loss}\nAccuracy: {accuracy}")
 
-# plt.plot(hist.history["accuracy"])
-# plt.plot(hist.history["val_accuracy"])
-# plt.title("Model Accuracy")
-# plt.ylabel("Accuracy")
-# plt.xlabel("Epoch")
-# plt.legend(["Train", "Val"], loc = "upper right")
-# plt.show()
+plt.plot(hist.history["accuracy"])
+plt.plot(hist.history["val_accuracy"])
+plt.title("Model Accuracy")
+plt.ylabel("Accuracy")
+plt.xlabel("Epoch")
+plt.legend(["Train", "Val"], loc = "upper right")
+plt.show()
 
 model.save("handwriting.model")
