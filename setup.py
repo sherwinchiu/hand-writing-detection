@@ -1,6 +1,7 @@
 import os
 import cv2
 import identify
+import matplotlib.pyplot as plt 
 from tensorflow.keras import datasets, layers, models
 from skimage.transform import resize
 from random import randint
@@ -32,27 +33,28 @@ def reformat(name):
             return name[:i - NUMBER_OF_DIGITS_IN_DATA]
     
 def getRandomData(n, image_list, label_list):
-    a, b = []
+    images = []
+    labels = []
     for i in range(n):
         r = randint(0, len(image_list) - 1)
-        a.append(image_list[r])
-        b.append(label_list[r])
-    return a, b
+        images.append(image_list[r])
+        labels.append(label_list[r])
+    return images, labels
 #-------------------------------MAIN------------------------------#
 # imports images
 for directory in DIRECTORIES:
     for filename in os.listdir(directory):
         if filename.endswith(".png") or filename.endswith(".jpg"):
-            image = cv2.imread(f"{directory}/{filename}")
+            image = cv2.imread(f"{directory}/{filename}", cv2.IMREAD_GRAYSCALE)
             if image is not None:
                 image = resize(image, (32, 32, 3))
-                image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
                 image = image/255
                 training_images.append(image)
                 training_labels.append(identify.classification.index(reformat(filename)))
 
 print("Import complete")
 testing_images, testing_labels = getRandomData(100, training_images, training_labels)
+
 # training
 model = models.Sequential()
 model.add(layers.Conv2D(32, (3, 3), activation = "relu", input_shape = (32, 32, 3)))
@@ -67,9 +69,17 @@ model.add(layers.Dense(10, activation = "softmax"))
 model.compile(optimizer = "adam", loss = "sparse_categorical_crossentropy", metrics = ["accuracy"])
 model.compile(optimizer = "adam", loss = "sparse_categorical_crossentropy", metrics = ["accuracy"])
 
-model.fit(training_images, training_labels, epochs = 10, validation_data = (testing_images, testing_labels))
+hist = model.fit(training_images, training_labels, epochs = 10, validation_data = (testing_images, testing_labels))
 
 loss, accuracy = model.evaluate(testing_images, testing_labels)
 print(f"Loss: {loss}\nAccuracy: {accuracy}")
+
+plt.plot(hist.history["accuracy"])
+plt.plot(hist.history["val_accuracy"])
+plt.title("Model Accuracy")
+plt.ylabel("Accuracy")
+plt.xlabel("Epoch")
+plt.legend(["Train", "Val"], loc = "upper right")
+plt.show()
 
 model.save("handwriting.model")
